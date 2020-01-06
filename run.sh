@@ -1,5 +1,7 @@
 #!/bin/sh
 
+git clone https://github.com/vulnersCom/nmap-vulners /usr/share/nmap/scripts/vulners && nmap --script-updatedb
+
 if [[ ! -z $generate_ips ]]
 then
     python /list_ip.py
