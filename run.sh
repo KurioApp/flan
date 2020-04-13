@@ -17,9 +17,15 @@ else
     mkdir /reports
 fi
 
+report_extension="tex"
+
+if [[ ! -z $format ]]
+then
+    report_extension=$format
+fi
+
 xml_dir=xml_files/$current_time
-report_file=reports/report_$current_time.tex
-report_file_pdf=reports/report_$current_time.pdf
+report_file=reports/report_$current_time.$report_extension
 
 function upload() {
     if [[ -z $upload ]]
@@ -48,16 +54,12 @@ do
 done < /shared/ips.txt
 
 python /output_report.py $root_dir$xml_dir $root_dir$report_file /shared/ips.txt
-sed -i 's/_/\\_/g' $root_dir$report_file
-sed -i 's/\$/\\\$/g' $root_dir$report_file
-sed -i 's/#/\\#/g' $root_dir$report_file
-sed -i 's/%/\\%/g' $root_dir$report_file
-
-latexmk -pdf -outdir=$root_dir/reports $root_dir$report_file #make pdf
-popdir=`pwd` #pushd
-cd $root_dir/reports
-latexmk -c -f $root_dir$report_file #cleanup tex aux files
-cd $popdir #popd
-
+if [[ $report_extension = "tex" ]]
+then
+    sed -i 's/_/\\_/g' $root_dir$report_file
+    sed -i 's/\$/\\\$/g' $root_dir$report_file
+    sed -i 's/#/\\#/g' $root_dir$report_file
+    sed -i 's/%/\\%/g' $root_dir$report_file
+fi
 upload $report_file
 upload $report_file_pdf
