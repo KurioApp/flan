@@ -62,4 +62,3 @@ then
     sed -i 's/%/\\%/g' $root_dir$report_file
 fi
 upload $report_file
-upload $report_file_pdf

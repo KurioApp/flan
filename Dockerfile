@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN apk add --no-cache nmap nmap-scripts git texlive-full
+RUN apk add --no-cache nmap nmap-scripts git
 COPY requirements.txt /
 RUN pip install --no-cache-dir -r requirements.txt
 
