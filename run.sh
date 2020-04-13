@@ -62,3 +62,4 @@ then
     sed -i 's/%/\\%/g' $root_dir$report_file
 fi
 upload $report_file
+python /send_slack.py $upload $report_file
