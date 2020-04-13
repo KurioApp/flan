@@ -1,4 +1,5 @@
 xmltodict==0.12.0
+google-api-python-client==1.7.12
 google-cloud-storage==1.23.0
 boto3==1.12.15
 Jinja2==2.10.3
